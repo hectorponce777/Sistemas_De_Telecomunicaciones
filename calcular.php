@@ -201,7 +201,7 @@
         {
             $decloB=-1*($blog+($blom/60)+($blos/3600));//LON2 NEGATIVA
         }
-        //TRANSVERGUEAMOS LA FORMULA PARA CALCULAR LA DISTANCIA ENTRE DOS PUNTOS GEOGRÁFICOS.
+        //LA FORMULA PARA CALCULAR LA DISTANCIA ENTRE DOS PUNTOS GEOGRÁFICOS.
         //$declaA = LAT1
         //$decloA = LON1
         //$declaB = LAT2
