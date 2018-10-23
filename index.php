@@ -30,7 +30,7 @@
                         <option value="5">Hz</option>
                     </select>
                 </td>
-                <td> <input type="submit" value="Calcular"> </td>
+                <td> <input type="submit" value="Calcular"> <input type="hidden" name="parte" value="1"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 <td> <input type="reset" value="Cancelar"> </td>
             </tr>
@@ -127,7 +127,7 @@
         </table>
         <table cellspacing="2" cellpadding="2" border="1" >
             <tr>
-                <td> <input type="submit" value="Calcular"> <input type="hidden" name="coords" value="1"></td>
+                <td> <input type="submit" value="Calcular"> <input type="hidden" name="parte" value="2"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 <td> <input type="reset" value="Cancelar"> </td>
             </tr>
@@ -153,7 +153,7 @@
                 </td>
                 <td>Introduce la Distancia en Kilómetros:</td>
                 <td><input type="text" size="6" maxlength="6" name="distfres"></td>
-                <td> <input type="submit" value="Calcular"> </td>
+                <td> <input type="submit" value="Calcular"> <input type="hidden" name="parte" value="3"></td>
                 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </td>
                 <td> <input type="reset" value="Cancelar"> </td>
             </tr>
