@@ -23,6 +23,9 @@
         //$rangofrecuencia=$_REQUEST['rangofreq'];
         //*****************************************************
         //LONGITUD DE ONDA *****************************************************
+        $parte=$_POST['parte'];
+        if ($parte==1)
+        {
         $frecuencia=$_POST['freq'];// Ejemplo 2.4
         $rangofrecuencia=$_POST['rangofreq'];// Ejemplo Thz, Ghz, Mhz, Khz, Hz
         $ckm=299792.458;//Velocidad de la Luz Real en Kilómetros
@@ -32,7 +35,7 @@
         if ($rangofrecuencia==1)//Opción Terahertz
         {
             $freq=$frecuencia;
-            $frecuencia=$frecuencia*1000000000000;
+            $frecuencia=$frecuencia*1000000000000; //De terahertz a Hertz
             $longkm=$ckm/$frecuencia;
             $longm=$cm/$frecuencia;
             $longcm=$ccm/$frecuencia;
@@ -55,7 +58,7 @@
         if ($rangofrecuencia==2)//Opción Gigahertz
         {
             $freq=$frecuencia;
-            $frecuencia=$frecuencia*1000000000;
+            $frecuencia=$frecuencia*1000000000; //De Gigahertz a Hertz
             $longkm=$ckm/$frecuencia;
             $longm=$cm/$frecuencia;
             $longcm=$ccm/$frecuencia;
@@ -77,7 +80,7 @@
         if ($rangofrecuencia==3)//Opción Megahertz
         {
             $freq=$frecuencia;
-            $frecuencia=$frecuencia*1000000;
+            $frecuencia=$frecuencia*1000000; //De Megahertz a Hertz
             $longkm=$ckm/$frecuencia;
             $longm=$cm/$frecuencia;
             $longcm=$ccm/$frecuencia;
@@ -99,7 +102,7 @@
         if ($rangofrecuencia==4)//Opción Kilohertz
         {
             $freq=$frecuencia;
-            $frecuencia=$frecuencia*1000;
+            $frecuencia=$frecuencia*1000;//De Kilohertz a Hertz
             $longkm=$ckm/$frecuencia;
             $longm=$cm/$frecuencia;
             $longcm=$ccm/$frecuencia;
@@ -121,7 +124,6 @@
         if ($rangofrecuencia==5)//Opción Hertz
         {
             $freq=$frecuencia;
-            //$frecuencia=$frecuencia;
             $longkm=$ckm/$frecuencia;
             $longm=$cm/$frecuencia;
             $longcm=$ccm/$frecuencia;
@@ -140,8 +142,12 @@
             echo ("La longitud de onda en Milímetros es: $longmm");
             echo ("<br>");
         }
+        }
         //*****************************************************
         //COORDENADAS *****************************************************
+        $parte=$_POST['parte'];
+        if ($parte==2)
+        {
         $puntoa=$_POST['puntoa'];// Nombre Punto A
         $asnma=$_POST['asnma'];// Altitud Sobre el Nivel del Mar Punto A
         
@@ -201,7 +207,7 @@
         {
             $decloB=-1*($blog+($blom/60)+($blos/3600));//LON2 NEGATIVA
         }
-        //LA FORMULA PARA CALCULAR LA DISTANCIA ENTRE DOS PUNTOS GEOGRÁFICOS.
+        //TRANSVERGUEAMOS LA FORMULA PARA CALCULAR LA DISTANCIA ENTRE DOS PUNTOS GEOGRÁFICOS.
         //$declaA = LAT1
         //$decloA = LON1
         //$declaB = LAT2
@@ -215,20 +221,46 @@
         //                              SENO((90-LAT1)*PI()/180)*
         //                              COS((LON1-LON2)*PI()/180)
         //                )
-        //DISTANCIA EN KILOMETROS
+        //DISTANCIA FISICA EN KILOMETROS
         $distkm=6378.1*acos(cos(pi()*(90-$declaB)/180)*cos((90-$declaA)*pi()/180)+sin((90-$declaB)*pi()/180)*sin((90-$declaA)*pi()/180)*cos(($decloA-$decloB)*pi()/180));
-        //DISTANCIA EN METROS
+        //DISTANCIA FISICA EN METROS
         $distm=$distkm*1000;
-        $coords=$_POST['coords'];
-        if ($coords==1)
-        {
-            echo ("Cálculo de la Distancia entre 2 puntos geográficos ***********************************************");
-            echo ("<br>");
-            echo ("La Distancia entre $puntoa y $puntob es: $distkm Km");
-            echo ("<br>");
-            echo ("La Distancia entre $puntoa y $puntob es: $distm m");
-            echo ("<br>");
+        //DIFERENCIA DE ALTURA
+        $difasnm=abs($asnma-$asnmb);
+        //DISTANCIA INALAMBRICA EN KILOMETROS (RAIZ(POTENCIA($distm,2)+POTENCIA($disti,2)))/1000
+        $distikm=sqrt(pow($distm,2)+pow($difasnm,2))/1000;
+        //DISTANCIA INALAMBRICA EN METROS pow ( number $base , number $exp )
+        $distim=sqrt(pow($distm,2)+pow($difasnm,2));
 
+        
+            echo ("Cálculo de la Distancia entre 2 puntos geográficos ***********************************************");
+            //echo ("<br>");
+            //echo ("Valor decimal de Latitud 1 $declaA");
+            //echo ("<br>");
+            //echo ("Valor decimal de Longitud 1 $decloA");
+            //echo ("<br>");
+            //echo ("Valor decimal de Latitud 2 $declaB");
+            //echo ("<br>");
+            //echo ("Valor decimal de Longitud 2 $decloB");
+            //echo ("<br>");
+            echo ("<br>");
+            echo ("<p>La Distancia física entre $puntoa y $puntob es: $distkm km </p>");
+            //echo ("<br>");
+            echo ("<p>La Distancia física entre $puntoa y $puntob es: $distm m </p>");
+            //echo ("<br>");
+            echo ("<p>La diferencia de altura entre $puntoa y $puntob es: $difasnm m </p>");
+            //echo ("<br>");
+            echo ("<p>La Distancia inalámbrica entre $puntoa y $puntob es: $distikm km </p>");
+            //echo ("<br>");
+            echo ("<p>La Distancia inalámbrica entre $puntoa y $puntob es: $distim m </p>");
+            //echo ("<br>");
+            //
+            //
+            // CALCULO DEL RUMBO
+            echo ("<p>El rumbo a seguir entre $puntoa y $puntob es:  </p>");
+            //echo ("<br>");
+            echo ("<p>El rumbo a seguir entre entre $puntob y $puntoa es:  </p>");
+            //echo ("<br>");
         }
         //***************************************************************************************** */
         //***************************************************************************************** */
@@ -236,6 +268,9 @@
         //ZONA DE FRESNEL
         //=17.32*RAIZ((DISTANCIAKILOMETROS/(4*FRECUENCIA EN GHZ)))
         // float sqrt ( float $arg )
+        $parte=$_POST['parte'];
+        if ($parte==3)
+        {
         $frecuencia=$_POST['freqfres'];// Ejemplo 2.4
         $rangofrecuencia=$_POST['rangofreqfres'];// Ejemplo Thz, Ghz, Mhz, Khz, Hz
         $distfres=$_POST['distfres'];// Distancia para zona de fresnel
@@ -250,9 +285,9 @@
             
             echo ("Cálculo de la Zona de Fresnel **************************************************************************");
             echo ("<br>");
-            echo ("La Frecuencia es: $frecuencia Thz");
+            echo ("<p>La Frecuencia es: $frecuencia Thz</p>");
             echo ("<br>");
-            echo ("La zona de fresnel es de: $zonafres metros");
+            echo ("<p>La zona de fresnel es de: $zonafres metros</p>");
             
         }
         if ($rangofrecuencia==2)//Fresnel en Gigahertz
@@ -306,6 +341,7 @@
             echo ("La Frecuencia es: $frecuencia Hz");
             echo ("<br>");
             echo ("La zona de fresnel es de: $zonafres metros");
+        }
         }
     ?>
 </body>
