@@ -1,5 +1,5 @@
 # Sistemas_De_Telecomunicaciones
-Repositorio para la Materia de Sistemas de Telecomunicaciones I y II, de la Universidad Tecnológica de la Selva. www.utselva.edu.mx
+Repositorio para la Materia de Sistemas de Telecomunicaciones I y II.
 
 Eres libre de realizar las modificaciones que creas necesarias, descargar y usar
 
